@@ -1,41 +1,65 @@
-# AI Knowledge Assistant (Asynchronous RAG System)
+# 🚀 AI Knowledge Assistant (Asynchronous RAG System)
 
-## Overview
+## 📖 Overview
 
-An AI-powered Retrieval-Augmented Generation (RAG) application that answers questions from PDF documents using semantic search and Large Language Models.
+AI Knowledge Assistant is a Retrieval-Augmented Generation (RAG) application that enables users to ask questions about PDF documents using natural language.
 
-The project uses FastAPI for serving APIs, Qdrant as the vector database, Redis Queue (RQ) for background task execution, Docker for containerization, and OpenAI embeddings for semantic retrieval.
+The application converts PDF content into vector embeddings, stores them in **Qdrant**, retrieves the most relevant document chunks based on semantic similarity, and generates context-aware answers using the **OpenAI API**.
 
----
-
-## Features
-
-* PDF-based question answering
-* Semantic search using vector embeddings
-* FastAPI REST APIs
-* Background task processing using Redis Queue (RQ)
-* Qdrant vector database
-* Dockerized services
-* OpenAI embeddings and LLM integration
+To improve scalability, query processing is handled asynchronously using **Redis Queue (RQ)** while **FastAPI** exposes REST APIs.
 
 ---
 
-## Tech Stack
+## ✨ Features
 
-* Python
-* FastAPI
-* LangChain
-* OpenAI API
-* Qdrant
-* Redis
-* RQ (Redis Queue)
-* Docker
+* 📄 PDF document ingestion
+* 🔍 Semantic search using vector embeddings
+* 🤖 AI-powered question answering
+* ⚡ Asynchronous background processing with Redis Queue (RQ)
+* 🌐 FastAPI REST API
+* 🐳 Dockerized Qdrant Vector Database
+* 📚 Automatic API documentation with Swagger UI
 
 ---
 
-## Project Structure
+## 🛠 Tech Stack
 
+| Category         | Technologies                  |
+| ---------------- | ----------------------------- |
+| Backend          | Python, FastAPI               |
+| AI Framework     | LangChain                     |
+| LLM              | OpenAI GPT                    |
+| Embeddings       | OpenAI text-embedding-3-large |
+| Vector Database  | Qdrant                        |
+| Queue System     | Redis Queue (RQ)              |
+| Containerization | Docker                        |
+| Environment      | Python Virtual Environment    |
+
+---
+
+## 🏗 Architecture
+
+```text
+User
+   │
+   ▼
+FastAPI Server
+   │
+   ▼
+Redis Queue (RQ)
+   │
+   ▼
+Background Worker
+   │
+   ├── Qdrant Vector Database
+   └── OpenAI API
 ```
+
+---
+
+## 📂 Project Structure
+
+```text
 rag_queue/
 │── client/
 │── queues/
@@ -44,26 +68,27 @@ rag_queue/
 │── docker-compose.yml
 │── requirements.txt
 │── .env.example
+│── README.md
 ```
 
 ---
 
-## Installation
+## ⚙️ Installation
 
-Clone the repository
+### Clone the repository
 
 ```bash
-git clone <repository-url>
-cd rag_queue
+git clone https://github.com/Harsh-code-dev/async-rag-chatbot.git
+cd async-rag-chatbot
 ```
 
-Create a virtual environment
+### Create a virtual environment
 
 ```bash
 python -m venv venv
 ```
 
-Activate it
+### Activate it
 
 Windows
 
@@ -71,31 +96,37 @@ Windows
 venv\Scripts\activate
 ```
 
-Install dependencies
+### Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Create a `.env` file
+### Configure environment variables
 
-```
-OPENAI_API_KEY=your_api_key
+Create a `.env` file.
+
+```env
+OPENAI_API_KEY=your_openai_api_key
 ```
 
-Start Docker
+---
+
+## ▶️ Running the Project
+
+### Start Qdrant
 
 ```bash
 docker compose up -d
 ```
 
-Run the FastAPI server
+### Start the FastAPI server
 
 ```bash
 python -m rag_queue.main
 ```
 
-Run the worker
+### Start the Redis Queue Worker (Windows)
 
 ```bash
 rq worker --worker-class rq.worker.SimpleWorker
@@ -103,12 +134,31 @@ rq worker --worker-class rq.worker.SimpleWorker
 
 ---
 
-## API Documentation
+## 📚 API Documentation
 
-After starting the server, visit
+Once the server is running, open:
 
-```
+```text
 http://localhost:8000/docs
 ```
 
-to access the Swagger UI.
+Swagger UI provides interactive documentation for all available endpoints.
+
+---
+
+## 🔮 Future Improvements
+
+* Multi-document support
+* Chat history
+* Streaming responses
+* User authentication
+* Conversation memory
+* Cloud deployment
+
+---
+
+## 👨‍💻 Author
+
+**Harsh Kumar**
+
+GitHub: https://github.com/Harsh-code-dev
